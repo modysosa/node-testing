@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const port = 3000;
@@ -15,14 +16,12 @@ app.get("/index.html", (req, res) => {
 
 // mongoose
 //   .connect(
-//     "mongodb+srv://modysosa_db_user:khbIddyXBqmbLPVE@cluster0.hme7w4i.mongodb.net/?appName=Cluster0",
+//     "llllllllllllllllllllllllink",
 //   )
 //   .then(() => {})
 //   .catch(() => {});
 mongoose
-  .connect(
-    "mongodb+srv://modysosa_db_user:khbIddyXBqmbLPVE@cluster0.hme7w4i.mongodb.net/all-data?appName=Cluster0",
-  )
+  .connect(process.env.MONGO_URI)
   // ----/all-data?----
   .then(() => {
     app.listen(port, () => {
