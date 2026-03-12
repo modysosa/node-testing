@@ -5,9 +5,16 @@ const port = 3000;
 const mongoose = require("mongoose");
 app.use(express.urlencoded({ extended: true }));
 const Mydata1 = require("./models/schema-structure");
+app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.sendFile("./views/home.html", { root: __dirname });
+  Mydata1.find()
+    .then((resulteee) => {
+      res.render("home", { mytitle: "Home Page", meme: resulteee });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/index.html", (req, res) => {
