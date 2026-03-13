@@ -1,32 +1,31 @@
 require("dotenv").config();
 const express = require("express");
+const mongoose = require("mongoose");
+const Mydata1 = require("./models/schema-structure");
+
 const app = express();
 const port = 3000;
-const mongoose = require("mongoose");
+
 app.use(express.urlencoded({ extended: true }));
-const Mydata1 = require("./models/schema-structure");
 app.set("view engine", "ejs");
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  Mydata1.find()
-    .then((resulteee) => {
-      res.render("home", { mytitle: "Home Page", meme: resulteee });
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  res.render("index", { mytitle: "Home Page" });
 });
 
-app.get("/index.html", (req, res) => {
-  res.send("<h1>Data Saved Successfully... </h1>");
+app.get("/user/add.html", (req, res) => {
+  res.render("user/add");
 });
 
-// mongoose
-//   .connect(
-//     "llllllllllllllllllllllllink",
-//   )
-//   .then(() => {})
-//   .catch(() => {});
+app.get("/user/view.html", (req, res) => {
+  res.render("user/view");
+});
+
+app.get("/user/edit.html", (req, res) => {
+  res.render("user/edit");
+});
+
 mongoose
   .connect(process.env.MONGO_URI)
   // ----/all-data?----
@@ -38,19 +37,3 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-app.post("/", (req, res) => {
-  // console.log(req.body);
-  // res.redirect("/");
-  console.log(req.body);
-
-  const mydata = new Mydata1(req.body);
-  mydata
-    .save()
-    .then(() => {
-      res.redirect("/index.html");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-});

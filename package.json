@@ -2,9 +2,11 @@
   "name": "testing",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node --watch app.js",
+    "sync": "browser-sync start --config bs-config.js",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,8 @@
     "ejs": "^5.0.1",
     "express": "^5.2.1",
     "mongoose": "^9.3.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^3.0.4"
   }
 }

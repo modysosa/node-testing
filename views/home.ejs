@@ -7,6 +7,7 @@
     <title>
         <%= mytitle %>
     </title>
+    <link rel="stylesheet" href="mystyle.css">
 </head>
 
 <body>
@@ -21,8 +22,10 @@
         <input name="usernameee" type="text" id="idddd">
         <button>Send</button>
     </form>
-    <h1>Your name is <%= meme[0].usernameee %>
-    </h1>
+    <!-- <h1>Your name is <%= meme[1].usernameee %>
+    </h1> -->
+    <h1>Your name is <%= meme.length> 0 ? meme[meme.length - 1].usernameee : "No data yet" %></h1>
+    <h1>Your name is <%= meme.length> 0 ? meme[0].usernameee : "No data yet" %></h1>
 
 </body>
 
