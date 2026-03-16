@@ -26,6 +26,9 @@ app.get("/user/edit.html", (req, res) => {
   res.render("user/edit");
 });
 
+app.get("/user/user/add.html", (req, res) => {
+  res.render("user/add");
+});
 mongoose
   .connect(process.env.MONGO_URI)
   // ----/all-data?----
