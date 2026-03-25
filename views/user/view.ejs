@@ -176,14 +176,15 @@
                 <tr>
                   <th scope="row">Created on</th>
                   <td>
-                    <%= user.firstName %>
+                    <%= mm(user.createdAt).format("DD-MM-YYYY"); %> ==
                   </td>
                 </tr>
 
                 <tr>
                   <th scope="row">Last Update</th>
                   <td>
-                    <%= user.firstName %>
+                    <%= mm(user.updatedAt).format("DD-MM-YYYY"); %> ==
+                      <%= mm(user.updatedAt).fromNow(); %>
                   </td>
                 </tr>
               </tbody>
