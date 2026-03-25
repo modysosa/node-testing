@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const Mydata1 = require("./models/schema-structure");
+// const Mydata1 = require("./models/schema-structure");
+const User = require("./models/customerSchema");
 
 const app = express();
 const port = 3000;
@@ -11,7 +12,13 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.render("index", { mytitle: "Home Page" });
+  User.find()
+    .then((result) => {
+      res.render("index", { mytitle: "Home Page", users: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/user/add.html", (req, res) => {
@@ -29,6 +36,23 @@ app.get("/user/edit.html", (req, res) => {
 app.get("/user/user/add.html", (req, res) => {
   res.render("user/add");
 });
+
+// Get Requst
+
+//Post Requst
+app.post("/user/add.html", (req, res) => {
+  const user = new User(req.body);
+  // console.log(req.body);
+  user
+    .save()
+    .then(() => {
+      res.redirect("/user/add.html");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
 mongoose
   .connect(process.env.MONGO_URI)
   // ----/all-data?----
