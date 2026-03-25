@@ -25,8 +25,18 @@ app.get("/user/add.html", (req, res) => {
   res.render("user/add");
 });
 
-app.get("/user/view.html", (req, res) => {
-  res.render("user/view");
+// app.get("/user/view.html", (req, res) => {
+//   res.render("user/view");
+// });
+app.get("/user/:id", (reqqqq, res) => {
+  User.findById(reqqqq.params.id)
+    .then((result) => {
+      console.log(result);
+      res.render("user/view", { user: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 app.get("/user/edit.html", (req, res) => {
