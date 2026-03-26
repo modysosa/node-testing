@@ -198,9 +198,11 @@
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                   Close
                 </button>
-                <button type="button" class="btn btn-danger">
-                  Delete
-                </button>
+                <form action="/edit/<%= user._id %>?_method=DELETE" method="post">
+                  <button type="submit" class="btn btn-danger">
+                    Delete
+                  </button>
+                </form>
               </div>
             </div>
           </div>

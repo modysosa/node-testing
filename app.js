@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const User = require("./models/customerSchema");
 var moment = require("moment");
+var methodOverride = require("method-override");
 
 const app = express();
 const port = 3000;
@@ -10,6 +11,7 @@ const port = 3000;
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 
 ////////////////////////// Get Requst /////////////////////////////////////////////////////
 
@@ -23,19 +25,26 @@ app.get("/", (req, res) => {
     });
 });
 
+app.get("/edit/:id", (req, res) => {
+  User.findById(req.params.id)
+    .then((result) => {
+      if (!result) {
+        return res.status(404).send("User not found");
+      }
+
+      return res.render("user/edit", { user: result, moment: moment });
+    })
+    .catch((err) => {
+      console.log(err);
+      return res.status(500).send("Server error");
+    });
+});
+
 app.get("/user/add.html", (req, res) => {
   res.render("user/add");
 });
 
-app.get("/user/edit.html", (req, res) => {
-  res.render("user/edit");
-});
-
-app.get("/user/user/add.html", (req, res) => {
-  res.render("user/add");
-});
-
-app.get("/user/:id", (reqqqq, res) => {
+app.get("/view/:id", (reqqqq, res) => {
   User.findById(reqqqq.params.id)
     .then((result) => {
       console.log(result);
@@ -54,6 +63,19 @@ app.post("/user/add.html", (req, res) => {
     .save()
     .then(() => {
       res.redirect("/user/add.html");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+//////// DELETE  //////////////////////
+
+app.delete("/edit/:id", (req, res) => {
+  User.findByIdAndDelete(req.params.id)
+    // User.deleteOne({_id:req.params.id})
+    .then((result) => {
+      res.redirect("/");
     })
     .catch((err) => {
       console.log(err);
