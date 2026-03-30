@@ -66,12 +66,13 @@ app.get("/view/:id", (reqqqq, res) => {
 
 ////////////////////////////Post Requst/////////////////////////////
 app.post("/user/add.html", (req, res) => {
-  const user = new User(req.body);
+  // const user = new User(req.body);
   // console.log(req.body);
-  user
-    .save()
+  // user.save()
+
+  User.create(req.body)
     .then(() => {
-      res.redirect("/user/add.html");
+      res.redirect("/");
     })
     .catch((err) => {
       console.log(err);
@@ -84,6 +85,20 @@ app.delete("/edit/:id", (req, res) => {
   User.findByIdAndDelete(req.params.id)
     // User.deleteOne({_id:req.params.id})
     .then((result) => {
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+//////// PUT  //////////////////////
+
+app.put("/edit/:id", (req, res) => {
+  // User.updateOne({ _id: req.params.id }, req.body)
+  User.findByIdAndUpdate(req.params.id, req.body)
+    .then((result) => {
+      console.log(result);
       res.redirect("/");
     })
     .catch((err) => {

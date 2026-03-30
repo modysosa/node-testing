@@ -128,36 +128,39 @@
 
 
 
-            <form class="mx-0 row gx-3 gy-4 mt-2">
+            <form class="mx-0 row gx-3 gy-4 mt-2" action="/edit/<%= user._id %>?_method=PUT" method="post">
               <div class="col-md-6">
                 <label for="inputfirstName4" class="form-label">First Name:</label>
-                <input value="<%= user.firstName %>" type="text" class="form-control" id="inputfirstName4" />
+                <input name="firstName" value="<%= user.firstName %>" type="text" class="form-control"
+                  id="inputfirstName4" />
               </div>
               <div class="col-md-6">
                 <label for="inputlastName4" class="form-label">Last Name:</label>
-                <input value="<%= user.lastName %>" type="text" class="form-control" id="inputlastName4" />
+                <input name="lastName" value="<%= user.lastName %>" type="text" class="form-control"
+                  id="inputlastName4" />
               </div>
 
               <div class="col-md-6">
                 <label for="inputemail4" class="form-label">Email:</label>
-                <input value="<%= user.email %>" type="email" class="form-control" id="inputemail4" />
+                <input name="email" value="<%= user.email %>" type="email" class="form-control" id="inputemail4" />
               </div>
               <div class="col-md-6">
                 <label for="inputtele4" class="form-label">Telephone:</label>
-                <input value="<%= user.telephone %>" type="number" class="form-control" id="inputtele4" />
+                <input name="telephone" value="<%= user.telephone %>" type="number" class="form-control"
+                  id="inputtele4" />
               </div>
 
               <div>
                 <div class="col-md-6">
                   <label for="inputage4" class="form-label">Age:</label>
-                  <input value="<%= user.age %>" type="number" class="form-control" id="inputage4" />
+                  <input name="age" value="<%= user.age %>" type="number" class="form-control" id="inputage4" />
                 </div>
               </div>
 
               <div>
                 <div class="col-md-6">
                   <label for="inputCountry" class="form-label">Country:</label>
-                  <select id="inputCountry" class="form-select">
+                  <select name="country" id="inputCountry" class="form-select">
                     <option selected hidden disabled>Choose here ...</option>
 
                     <% countries.forEach(country=> { %>
@@ -173,7 +176,7 @@
                 <div class="col-md-6">
                   <label for="inputGender" class="form-label">Gender:</label>
 
-                  <select id="inputGender" name="gender" class="form-select">
+                  <select name="gender" id="inputGender" name="gender" class="form-select">
                     <option disabled <%=!user.gender ? 'selected' : '' %>>
                       Choose here ...
                     </option>
