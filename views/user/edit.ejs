@@ -109,11 +109,16 @@
             <nav class="px-2 mt-4 d-flex flex-wrap justify-content-between" aria-label="breadcrumb">
               <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Ali Hassan</li>
+                <li class="breadcrumb-item active" aria-current="page">
+                  <%= user.firstName %>
+                    <%= user.lastName %>
+                </li>
               </ol>
 
 
-              <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span> 6487021520bcf1af6319484c</p>
+              <p class="me-md-5"> <span class="fw-medium fs-6">Id :</span>
+                <%= user._id %>
+              </p>
             </nav>
 
 
@@ -126,26 +131,26 @@
             <form class="mx-0 row gx-3 gy-4 mt-2">
               <div class="col-md-6">
                 <label for="inputfirstName4" class="form-label">First Name:</label>
-                <input placeholder="Ali..." type="text" class="form-control" id="inputfirstName4" />
+                <input value="<%= user.firstName %>" type="text" class="form-control" id="inputfirstName4" />
               </div>
               <div class="col-md-6">
                 <label for="inputlastName4" class="form-label">Last Name:</label>
-                <input placeholder="Hassan..." type="text" class="form-control" id="inputlastName4" />
+                <input value="<%= user.lastName %>" type="text" class="form-control" id="inputlastName4" />
               </div>
 
               <div class="col-md-6">
                 <label for="inputemail4" class="form-label">Email:</label>
-                <input placeholder="ali@gmail.com" type="email" class="form-control" id="inputemail4" />
+                <input value="<%= user.email %>" type="email" class="form-control" id="inputemail4" />
               </div>
               <div class="col-md-6">
                 <label for="inputtele4" class="form-label">Telephone:</label>
-                <input placeholder="011987899" type="number" class="form-control" id="inputtele4" />
+                <input value="<%= user.telephone %>" type="number" class="form-control" id="inputtele4" />
               </div>
 
               <div>
                 <div class="col-md-6">
                   <label for="inputage4" class="form-label">Age:</label>
-                  <input placeholder="Your Age: ..." type="number" class="form-control" id="inputage4" />
+                  <input value="<%= user.age %>" type="number" class="form-control" id="inputage4" />
                 </div>
               </div>
 
@@ -155,8 +160,11 @@
                   <select id="inputCountry" class="form-select">
                     <option selected hidden disabled>Choose here ...</option>
 
-                    <option>Morocco</option>
-                    <option>Egypt</option>
+                    <% countries.forEach(country=> { %>
+                      <option value="<%= country %>" <%=country===user.country ? 'selected' : '' %>>
+                        <%= country %>
+                      </option>
+                      <% }) %>
                   </select>
                 </div>
               </div>
@@ -164,10 +172,19 @@
               <div>
                 <div class="col-md-6">
                   <label for="inputGender" class="form-label">Gender:</label>
-                  <select id="inputGender" class="form-select">
-                    <option selected hidden disabled>Choose here ...</option>
-                    <option>Male</option>
-                    <option>Female</option>
+
+                  <select id="inputGender" name="gender" class="form-select">
+                    <option disabled <%=!user.gender ? 'selected' : '' %>>
+                      Choose here ...
+                    </option>
+
+                    <option value="Male" <%=user.gender==='Male' ? 'selected' : '' %>>
+                      Male
+                    </option>
+
+                    <option value="Female" <%=user.gender==='Female' ? 'selected' : '' %>>
+                      Female
+                    </option>
                   </select>
                 </div>
               </div>

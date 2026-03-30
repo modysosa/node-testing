@@ -53,16 +53,18 @@
               </div>
               <div class="col-md-6">
                 <label for="inputlastName4" class="form-label">Last Name:</label>
-                <input name="lastName" placeholder="Hassan..." type="text" class="form-control" id="inputlastName4" />
+                <input name="lastName" placeholder="Your last Name..." type="text" class="form-control"
+                  id="inputlastName4" />
               </div>
 
               <div class="col-md-6">
                 <label for="inputemail4" class="form-label">Email:</label>
-                <input name="email" placeholder="ali@gmail.com" type="email" class="form-control" id="inputemail4" />
+                <input name="email" placeholder="Your Email..." type="email" class="form-control" id="inputemail4" />
               </div>
               <div class="col-md-6">
                 <label for="inputtele4" class="form-label">Telephone:</label>
-                <input name="telephone" placeholder="011987899" type="number" class="form-control" id="inputtele4" />
+                <input name="telephone" placeholder="Your Mobile..." type="number" class="form-control"
+                  id="inputtele4" />
               </div>
 
               <div>
@@ -77,9 +79,13 @@
                   <label for="inputCountry" class="form-label">Country:</label>
                   <select name="country" id="inputCountry" class="form-select">
                     <option selected hidden disabled>Choose here ...</option>
+                    <% countries.forEach(element=> { %>
+                      <option>
+                        <%= element %>
+                      </option>
+                      <% }) %>
 
-                    <option>Morocco</option>
-                    <option>Egypt</option>
+
                   </select>
                 </div>
               </div>

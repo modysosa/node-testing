@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const User = require("./models/customerSchema");
 var moment = require("moment");
 var methodOverride = require("method-override");
+const countries = require("./public/data/countries");
 
 const app = express();
 const port = 3000;
@@ -18,7 +19,11 @@ app.use(methodOverride("_method"));
 app.get("/", (req, res) => {
   User.find()
     .then((result) => {
-      res.render("index", { mytitle: "Home Page", users: result, mm: moment });
+      res.render("index", {
+        mytitle: "Home Page",
+        users: result,
+        mm: moment,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -32,7 +37,11 @@ app.get("/edit/:id", (req, res) => {
         return res.status(404).send("User not found");
       }
 
-      return res.render("user/edit", { user: result, moment: moment });
+      return res.render("user/edit", {
+        user: result,
+        moment: moment,
+        countries: countries,
+      });
     })
     .catch((err) => {
       console.log(err);
@@ -41,7 +50,7 @@ app.get("/edit/:id", (req, res) => {
 });
 
 app.get("/user/add.html", (req, res) => {
-  res.render("user/add");
+  res.render("user/add", { countries: countries });
 });
 
 app.get("/view/:id", (reqqqq, res) => {
