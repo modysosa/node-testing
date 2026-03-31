@@ -107,11 +107,9 @@
             <div class="container-fluid justify-content-center justify-content-md-between">
               <a class="navbar-brand fw-medium fs-3 mb-1 mb-md-0">Course <sup>4</sup> arab</a>
 
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                <button class="btn btn-outline-success" type="submit">
-                  Search
-                </button>
+              <form class="d-flex" role="search" action="/user/search.html" method="POST">
+                <input name="search" class="form-control me-2" type="search" placeholder="Search" />
+                <button class="btn btn-outline-success" type="submit">Search</button>
               </form>
             </div>
           </nav>
@@ -121,33 +119,63 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Full Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Telephne</th>
                 <th scope="col">Gender</th>
+                <th scope="col">Age</th>
                 <th scope="col">Country</th>
-
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>test1</td>
-                <td>test2</td>
-                <td>@test3</td>
+              <% if (obj.length> 0) { %>
+                <% obj.forEach((user, index)=> { %>
+                  <tr>
+                    <th scope="row">
+                      <%= index + 1 %>
+                    </th>
+                    <td>
+                      <%= user.firstName %>
+                        <%= user.lastName %>
+                    </td>
+                    <td>
+                      <%= user.email %>
+                    </td>
+                    <td>
+                      <%= user.telephone %>
+                    </td>
+                    <td>
+                      <%= user.gender %>
+                    </td>
+                    <td>
+                      <%= user.age %>
+                    </td>
+                    <td>
+                      <%= user.country %>
+                    </td>
 
-                <td>
-                  <a data-bs-toggle="tooltip" data-bs-title="View details" data-bs-placement="top"
-                    class="btn btn-primary btn-sm" href="./user/view.html"><i class="bi bi-eye"></i></a>
+                    <td>
+                      <a class="btn btn-primary btn-sm" href="/view/<%= user._id %>">
+                        <i class="bi bi-eye"></i>
+                      </a>
 
-                  <a data-bs-toggle="tooltip" data-bs-title="Edit user" data-bs-placement="top"
-                    class="btn btn-primary btn-sm" href="./user/edit.html">
-                    <i class="bi bi-pencil"></i>
-                  </a>
-                  <button data-bs-toggle="tooltip" data-bs-title="Delete user" data-bs-placement="top"
-                    class="btn btn-danger btn-sm">
-                    <i class="bi bi-trash"></i>
-                  </button>
-                </td>
-              </tr>
+                      <a class="btn btn-primary btn-sm" href="/edit/<%= user._id %>">
+                        <i class="bi bi-pencil"></i>
+                      </a>
+
+                      <form action="/edit/<%= user._id %>?_method=DELETE" method="POST" style="display:inline;">
+                        <button class="btn btn-danger btn-sm">
+                          <i class="bi bi-trash"></i>
+                        </button>
+                      </form>
+                    </td>
+                  </tr>
+                  <% }) %>
+                    <% } else { %>
+                      <tr>
+                        <td colspan="5">No results found</td>
+                      </tr>
+                      <% } %>
             </tbody>
           </table>
         </section>
