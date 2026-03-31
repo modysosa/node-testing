@@ -35,7 +35,7 @@ user_edit_get = (req, res) => {
     });
 };
 
-user_findID_get = (reqqqq, res) => {
+user_view_get = (reqqqq, res) => {
   User.findById(reqqqq.params.id)
     .then((result) => {
       // console.log(result);
@@ -78,7 +78,7 @@ user_delete = (req, res) => {
     });
 };
 
-user_edit = (req, res) => {
+user_put = (req, res) => {
   // User.updateOne({ _id: req.params.id }, req.body)
   User.findByIdAndUpdate(req.params.id, req.body)
     .then((result) => {
@@ -111,10 +111,10 @@ user_addHome_get = (req, res) => {
 module.exports = {
   user_index_get,
   user_edit_get,
-  user_findID_get,
+  user_view_get,
   user_search_post,
   user_delete,
-  user_edit,
+  user_put,
   user_add_get,
   user_addHome_get,
 };
